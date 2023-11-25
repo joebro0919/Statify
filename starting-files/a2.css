@@ -48,7 +48,7 @@ footer{
 
 }
 
-div.container{
+.container{
     display:flex;
     align-items: center;
     justify-content: center;
@@ -82,7 +82,7 @@ header button:hover{
     transform: scale(1.25);
 }
 .container li{
-    padding: 0.5em;
+    padding: 0.25em;
     font-size: larger;
 }
 
@@ -90,4 +90,14 @@ header button:hover{
     font-size: x-large;
     border-bottom:solid;
     padding:1em;
+}
+
+.song_container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.song_container span{
+    box-shadow: none;
 }
