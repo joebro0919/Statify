@@ -1,10 +1,10 @@
 
 :root{
     --green1:#222c31; 
-    --green2: #7fa99b; 
-    --green3: #7fa99b; 
-    --white:#fbf2d5;
-    --purple: #CCBCD5;
+    --green2: #F5F5F5 ; 
+    --green3: #FF7042; 
+    --white: #F5F5F5;
+    --purple: #FF7042 ;
 
 }
 
@@ -33,11 +33,12 @@ body{
 }
 header{
     display:flex;
-    background-color: var(--white);
+    background-color: #EBE3D5;
     padding: 1em;
     align-items:center;
     justify-content: center;
     gap: 2em;
+    border-bottom: solid 0.15em grey;
 
 }
 
@@ -50,7 +51,7 @@ footer{
 
 .container{
     display:flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     padding: 1em;
     gap: 2em;
@@ -60,8 +61,7 @@ footer{
 
 .container span{
     padding:1em;
-    box-shadow: 0.5em 0.5em 0.5em  var(--purple);
-    background-color: var(--white);
+    height:75vh;
 }
 
 header button{
@@ -82,22 +82,76 @@ header button:hover{
     transform: scale(1.25);
 }
 .container li{
-    padding: 0.25em;
+    padding: 10px;
     font-size: larger;
 }
 
 .container h2{
     font-size: x-large;
-    border-bottom:solid;
-    padding:1em;
+    padding: 1em;
+    margin:0em;   
 }
 
 .song_container{
     display:flex;
     align-items: center;
     justify-content: center;
+    border-top:solid 0.15em grey;
+    overflow-y: scroll;
+
 }
 
 .song_container span{
     box-shadow: none;
+}
+
+.song_container span ul{
+    box-shadow: none;
+    height:50vh;
+    margin:0%;
+    padding: 0%;
+    list-style-type: none;
+}
+
+.song_container h3{
+    padding:1em;
+    padding-left: 0.5em;
+    margin:0%;  
+    display:inline;
+}
+
+.song_container img{
+    display:inline;
+    position: relative;
+    bottom: -0.25em;
+}
+
+.search_title ul{
+    width:20vw;
+}
+.ellipse{
+    border:none;
+    background-color: transparent;
+    transition: transform 0.5s ;
+}
+
+.ellipse:hover{
+    transform: scale(1.2);
+    color: var(--green3);
+}
+
+.popup{
+    background-color : #FF7042;
+    color : #F5F5F5;
+    padding :0.5em;
+    border-radius :0.5em;
+}
+
+.song_link:hover{
+    color:#068FFF;
+}
+
+footer{
+    background-color: #EBE3D5;
+    border-top: solid 0.15em grey;
 }
