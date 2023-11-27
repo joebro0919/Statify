@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function(){
    for(let i = 0 ; i < 15; i++){
       let list_item = document.createElement("li");
       list_item.className = "song_link";
+      list_item.dataset.id = popularity[i].song_id;
       let artist_name = api_data.find(song => {
          return song.song_id == popularity[i].song_id;
       }).artist.name;
@@ -86,7 +87,6 @@ document.addEventListener("DOMContentLoaded", function(){
    });
 
    
-
    sort_button[1].addEventListener("click",function(){
       let artist_sort = api_data.sort((a, b) => {
          const nameA = a.artist.name.toUpperCase(); // ignore upper and lowercase
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
    sort_button[3].addEventListener("click",function(){
       let genre_sort = api_data.sort((a, b) => {
-         const nameA = a.genre.name.toUpperCase(); // ignore upper and lowercase
+         const nameA = a.genre.name.toUpperCase(); 
          const nameB = b.genre.name.toUpperCase(); // ignore upper and lowercase
          if (nameA < nameB) {
            return -1;
@@ -123,24 +123,21 @@ document.addEventListener("DOMContentLoaded", function(){
          if (nameA > nameB) {
            return 1;
          }
-         // names must be equal
          return 0;
        });
        transform_button(sort_button,3);
       display_search_page(genre_sort);
    });
 
-
    let parent = document.getElementsByTagName("body");
+   let home_view = document.getElementById("home");
+   let search_view = document.getElementById("search");
+   let playlist_view = document.getElementById("playlist");
+   let song_view = document.getElementById("song");
 
    parent[0].addEventListener("click", function(e){
 
       if(e.target && e.target.classList.contains("home_button")){
-         let home_view = document.getElementById("home");
-         let search_view = document.getElementById("search");
-         let playlist_view = document.getElementById("playlist");
-         let song_view = document.getElementById("song");
-
          search_view.style.display = "none";
          home_view.style.display = "block";
          playlist_view.style.display = "none";
@@ -151,35 +148,60 @@ document.addEventListener("DOMContentLoaded", function(){
    parent[0].addEventListener("click", function(e){
 
       if(e.target && e.target.classList.contains("song_link")){
-         let home_view = document.getElementById("home");
-         let search_view = document.getElementById("search");
-         let playlist_view = document.getElementById("playlist");
-         let song_view = document.getElementById("song");
-
          search_view.style.display = "none";
          home_view.style.display = "none";
          playlist_view.style.display = "none";
          song_view.style.display = "block"
+
+         let song_analysis = document.querySelectorAll("#song_analysis li");
+         song_analysis.innerHTML ="";
+         let song_details = document.querySelector("#song_details");
+         song_details.innerHTML = "";
+         
+         
+         let song = api_data.find(({song_id}) => song_id == e.target.dataset.id);
+         let song_analytics = Object.values(song.analytics);
+         let descriptors = ["energy","danceability","liveness","valence","acousticness","speechiness"];
+
+         for(let i = 0; i < song_analysis.length; i++){
+             song_analysis[i].textContent = `${descriptors[i]}`;
+             let bar = document.createElement("p");
+             let bar_width = song_analytics[i] *10;
+             bar.className = "song_bar";
+             bar.style.width = `${bar_width}px`;
+             song_analysis[i].appendChild(bar);
+         }
+
+         let song_title = document.createElement("h2");
+         let artist = document.createElement("p");
+         let genre = document.createElement("p");
+         let year = document.createElement("p");
+         let duration = document.createElement("p");
+         
+         song_title.textContent = `${song.title}`;
+         artist.textContent = `Artist: ${song.artist.name}`;
+         genre.textContent =  `Genre: ${song.genre.name}`;
+         year.textContent =  `Year: ${song.year}`;
+         duration.textContent =  `Duration: ${song.details.duration}s`;
+
+         song_details.appendChild(song_title);
+         song_details.appendChild(artist);
+         song_details.appendChild(genre);
+         song_details.appendChild(year);
+         song_details.appendChild(duration);
+          
       }
    })
 
    parent[0].addEventListener("click", function(e){
 
       if(e.target && e.target.classList.contains("search_button")){
-         let home_view = document.getElementById("home");
-         let search_view = document.getElementById("search");
-         let playlist_view = document.getElementById("playlist");
-         let song_view = document.getElementById("song");
-
          search_view.style.display = "block";
          home_view.style.display = "none";
          playlist_view.style.display = "none";
          song_view.style.display = "none"
       }
    })
-
-
-
 })
 
 /*
@@ -205,7 +227,7 @@ function fetch_api(api_url){
 }
 /*
 Input: Array with song data
-Returns: Array with objects that have song_id and popularity values arranged
+Returns: Array with objects that have the top 15 songs with song_id and popularity values arranged
 from most popular to least popular
 */
 function get_top_15(api_data){
@@ -221,6 +243,10 @@ function get_top_15(api_data){
    return popularity.slice(popularity.length - 15, popularity.length).reverse();;
 }
 
+/*
+Input: Array with song data
+Returns: Array with objects that have the top 15 artists ranked based on amount of songs
+*/
 function get_top_artists(api_data){
    const artists = [];
 
@@ -238,6 +264,12 @@ function get_top_artists(api_data){
    });
    return artists.slice(artists.length - 15, artists.length).reverse();
 }
+
+
+/*
+Input: Array with song data
+Returns: Array with objects that have the top 15 genres based on how many songs are in each genre
+*/
 
 function get_top_genres(api_data){
 
@@ -278,6 +310,7 @@ function display_search_page(api_data){
    for(let i = 0; i<api_data.length; i++){
       let song_title = document.createElement("li");
       song_title.className = "song_link";
+      song_title.dataset.id = api_data[i].song_id;
       let artist_name = document.createElement("li");
       let year_made = document.createElement("li");
       let genre = document.createElement("li");
