@@ -382,7 +382,7 @@ footer{
 
 .add .playlist_add_button{
     display: block;
-    content:url("/imgs/add.png");
+    content:url("imgs/add.png");
     width: 22px;
     height: 22px;
     padding: 10px;
@@ -390,7 +390,7 @@ footer{
 
 .remove .rem_frplaylist_button{
     display: block;
-    content: url("/imgs/remove.png");
+    content: url("imgs/remove.png");
     width: 22px;
     height: 22px;
     padding: 10px;
