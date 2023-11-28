@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function(){
             let descript_item = document.createElement("img");
             let descript_p = document.createElement("p");
             descript_p.textContent = "This song has high energy!"
-            descript_item.src = "/imgs/thunderbolt.png"
+            descript_item.src = "imgs/thunderbolt.png"
             descript_item.style.display = "inline";
             descript_item.style.width = "75px";
             descript_item.style.height = "75px";
@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", function(){
             let descript_item = document.createElement("img")
             let descript_p = document.createElement("p");
             descript_p.textContent = "This song is quite groovy!"
-            descript_item.src = "/imgs/dance.png"
+            descript_item.src = "imgs/dance.png"
             descript_item.style.display = "inline";
             descript_item.style.width = "75px";
             descript_item.style.height = "75px";
@@ -271,7 +271,7 @@ document.addEventListener("DOMContentLoaded", function(){
             let descript_item = document.createElement("img")
             let descript_p = document.createElement("p");
             descript_p.textContent = "This song gives happy vibes!"
-            descript_item.src = "/imgs/happy.png"
+            descript_item.src = "imgs/happy.png"
             descript_item.style.display = "inline";
             descript_item.style.width = "75px";
             descript_item.style.height = "75px";
@@ -287,7 +287,7 @@ document.addEventListener("DOMContentLoaded", function(){
             let descript_item = document.createElement("img")
             let descript_p = document.createElement("p");
             descript_p.textContent = "This song gives sad vibes :("
-            descript_item.src = "/imgs/sad.png"
+            descript_item.src = "imgs/sad.png"
             descript_item.style.display = "inline";
             descript_item.style.width = "75px";
             descript_item.style.height = "75px";
@@ -303,7 +303,7 @@ document.addEventListener("DOMContentLoaded", function(){
             let descript_item = document.createElement("img")
             let descript_p = document.createElement("p");
             descript_p.textContent = "This song is very acoustic!"
-            descript_item.src = "/imgs/guitar.png"
+            descript_item.src = "imgs/guitar.png"
             descript_item.style.display = "inline";
             descript_item.style.width = "75px";
             descript_item.style.height = "75px";
