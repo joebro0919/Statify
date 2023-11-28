@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="a2.css">
     <script src="assign2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -41,6 +42,53 @@
     </div>
 
     <div id="playlist">
+        <header>
+            <img  class ="home_button zoom" src="/imgs/statify-logos_transparent.png">
+            <button class = "search_button">Search</button>
+            <button class = "playlist_button">Playlist</button>
+            <button class = "credits_button">Credits</button>
+        </header>
+
+        <div id = "playlist_info">
+            <button id="clear_playlist">Clear Playlist</button>
+            <div>
+                cool
+            </div>
+        </div>
+        
+        <div class = "container">
+            <span class = "search_title">
+                <h3>Title</h3>
+                <ul></ul>
+            </span>
+            <span class = "search_artist" >
+                <h3>Artist</h3>
+                
+                <ul></ul>
+            </span>
+            <span class = "search_year">
+                <h3>Year</h3>
+                
+                <ul></ul>
+            </span>
+            <span class = "search_genre">
+                <h3>Genre</h3>
+                
+                <ul></ul>
+            </span>
+            <span class ="remove">
+                <h3>Remove</h3>
+                <ul></ul>
+            </span>
+        
+    
+        </div>
+    
+
+        <footer>
+            <img  class ="home_button zoom" src="/imgs/statify-logos_transparent.png">
+        </footer>
+
 
 
 
@@ -59,47 +107,17 @@
 
             <span id ="song_details">
                 <h2></h2>
-
-
-
             </span>
             <span id = "song_analysis">
                 <h2>Song Details</h2>
-                
-                <ul>
-                    <li>
-                        Energy:
-                    </li>
-                    <li>
-                        Danceability:
-                    </li>
-                    <li>
-                        Liveness:
-                    </li>
-                    <li>
-                        Valence:
-                    </li>
-                    <li>
-                        Acousticness:
-                    </li>
-                    <li>
-                        Speechiness
-                    </li>
-                </ul>
-
-
+                <canvas id="myChart" style="max-height: 50vh;"></canvas>
             </span>
-
-            
 
         </div>
         <footer>
             <img  class ="home_button zoom" src="/imgs/statify-logos_transparent.png">
         </footer>
-
-
-
-        
+   
     </div>
 
     <div id="search">
@@ -113,10 +131,33 @@
         <div class = "container">
 
             <span>
-                <form>
+                <form id = "search_form">
+                   
                     <h2>Song Search</h2>
-                    <input type = "radio">
+                    <ul>
+                        <li>
+                            <input type ="radio" name="search_option" value ="title">
+                            <label>Title:</label>
+                            <input type="text" name="title_search_val" id ="title_search_val"/>
 
+                        </li>
+                        <li>
+                            <input type ="radio" name="search_option" value ="artist"> 
+                            <label>Artist:</label>
+                            <input type="text" name="artist_search_val" id ="artist_search_val" list="artist_search" />
+                            <datalist id="artist_search">
+                            </datalist>
+                        </li>
+                        <li>
+                            <input type ="radio" name="search_option" value ="genre">
+                            <label>Genre:</label>
+                            <input type="text" name="genre_search_val" id="genre_search_val" list="genre_search" />
+                            <datalist id="genre_search">
+                            </datalist>
+                        </li>
+                    </ul>
+                    <input type="button" value = "Filter" id="filter">
+                    <input type="button" value = "Clear" id="clear">
                 </form>
             </span>
 
@@ -143,7 +184,7 @@
                         <img src="/imgs/down-arrow.png"  style="width:20px;height:20px;">
                         <ul></ul>
                     </span>
-                    <span>
+                    <span class ="add">
                         <h3>Add</h3>
                         <ul></ul>
                     </span>

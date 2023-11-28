@@ -40,20 +40,16 @@ body{
 
 #playlist{
     display:none;
-
-
 }
 
 #search{
-
     display:none;
-
 }
 
 #song{
     display:none;
-
 }
+
 header{
     display:flex;
     background-color: var(--primary-dark);
@@ -118,6 +114,8 @@ header button:hover{
     padding: 1em;
     margin:0em;   
 }
+
+
 
 .song_container{
     display:flex;
@@ -224,3 +222,89 @@ footer{
     display:inline;
     margin:0.5em;
 }
+
+#search_form ul{
+    list-style-type:none;
+    padding: 0;
+}
+
+.search_link:hover{
+    color: var(--accent);
+}
+
+#myChart{
+
+    background-color: #EDEDED;
+    border-radius: 100px;
+    margin: 1em;
+    padding: 1em;
+    max-width: 30vw;
+}
+
+#playlist_info{
+    display: flex;
+    background-color: var(--primary-dark);
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    border-top:none;
+    border-bottom: solid var(--accent) 0.15em;
+    min-height: 20vh;
+}
+
+#playlist_info button{
+    background-color: var(--primary-dark);
+    border:none;
+    color:var(--text);
+    font-size: large;
+    font-weight: bold;
+}
+
+#playlist_info button:hover{
+    color:rgb(236, 127, 127);
+}
+
+#playlist_info h2{
+    margin:0;
+}
+#playlist .container{
+    gap:0;
+}
+
+#playlist span{
+    border-top: solid var(--accent);
+    border-radius: 15px;
+    min-height: 80vh;
+}
+
+#playlist ul{
+    list-style-type:none;
+    padding-left: 0%;
+    background-color: var(--primary-dark-lighter);
+    border-radius: 15px;
+}
+
+#playlist .search_title ul{
+    min-width: 35vw;
+   
+}
+
+.add .playlist_add_button{
+    display: block;
+    content:url("/imgs/add.png");
+    width: 22px;
+    height: 22px;
+    padding: 10px;
+}
+
+.remove .rem_frplaylist_button{
+    display: block;
+    content: url("/imgs/remove.png");
+    width: 22px;
+    height: 22px;
+    padding: 10px;
+}
+
+
+
+
