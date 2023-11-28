@@ -1,4 +1,3 @@
-
 const api = 'https://www.randyconnolly.com/funwebdev/3rd/api/music/songs-nested.php';
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -11,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function(){
       api_data =JSON.parse(localStorage.getItem("data"));
    }
    
+   //Initially sorts the api data by title
    api_data.sort((a, b) => {
       const nameA = a.title.toUpperCase(); // ignore upper and lowercase
       const nameB = b.title.toUpperCase(); // ignore upper and lowercase
@@ -20,15 +20,16 @@ document.addEventListener("DOMContentLoaded", function(){
       if (nameA > nameB) {
         return 1;
       }
-      // names must be equal
       return 0;
     });
    
+   //Important global data structures
    let api_search = [...api_data];
    let playlist_data = [];
-   let popularity = get_top_15(api_data);
 
-   //fill popupular songs
+
+   //fill popular songs for home view
+   let popularity = get_top_15(api_data);
    let pop_list = document.getElementById("popular");
 
    for(let i = 0 ; i < 15; i++){
@@ -46,12 +47,10 @@ document.addEventListener("DOMContentLoaded", function(){
       pop_list.appendChild(list_item);
    }
 
-   //fill top artists
+   //fil top artists for home view
    let artists = get_top_artists(api_data);
    let top_artists = artists.slice(artists.length - 15, artists.length).reverse();
    let artist_list = document.getElementById("artists");
-
-   console.log(artists);
 
    for(let i = 0 ; i < 15; i++){
       let list_item = document.createElement("li");
@@ -63,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function(){
       artist_list.appendChild(list_item);
    }
 
-   //fill top genres
+   //fill top genres for home view
    let genres = get_top_genres(api_data);
    let top_genres = genres.slice(genres.length - 15, genres.length).reverse();
    let genre_list = document.getElementById("genres");
@@ -78,9 +77,7 @@ document.addEventListener("DOMContentLoaded", function(){
       genre_list.appendChild(list_item);
    }
    
-   
-
-   //Populates the form on the search view
+   //Populates the form in the search view
    let artist_search = document.getElementById("artist_search");
    let genre_search = document.getElementById("genre_search");
 
@@ -96,6 +93,7 @@ document.addEventListener("DOMContentLoaded", function(){
       genre_search.appendChild(form_option);
    }
 
+   //Next few events are event listeners for the sort buttons in the search view.
 
    //Sorts the modified api data by title and displays it
    let sort_button = document.querySelectorAll(".song_container img");
@@ -163,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function(){
    });
 
 
-   //Event listeners for the header
+   //Event listeners for the header for switching views
    let parent = document.getElementsByTagName("body");
    let home_view = document.getElementById("home");
    let search_view = document.getElementById("search");
@@ -194,11 +192,11 @@ document.addEventListener("DOMContentLoaded", function(){
          chart.innerHTML ="";
          let song_details = document.querySelector("#song_details");
          song_details.innerHTML = "";
+         let song_stats = document.getElementById("song_descript");
          
          let song = api_data.find(({song_id}) => song_id == e.target.dataset.id);
          let song_analytics = Object.values(song.analytics);
-         
-
+      
          if(radar_chart != null){
             radar_chart.destroy();
          }
@@ -216,6 +214,7 @@ document.addEventListener("DOMContentLoaded", function(){
             },
          }); 
 
+         //Create elements to go in song details
          let song_title = document.createElement("h2");
          let artist = document.createElement("p");
          let genre = document.createElement("p");
@@ -230,6 +229,90 @@ document.addEventListener("DOMContentLoaded", function(){
          let seconds = song.details.duration - minutes * 60;
          duration.textContent =  `Duration: ${minutes} minutes and ${seconds} seconds`;
 
+         //Create elements to go in song description
+         let descript_list = document.querySelector("#song_descript");
+         descript_list.innerHTML = "";
+
+         if(song_analytics[0] >= 60){
+            let descript_entry = document.createElement("p");
+            descript_entry.className = "descript_entry";
+            let descript_item = document.createElement("img");
+            let descript_p = document.createElement("p");
+            descript_p.textContent = "This song has high energy!"
+            descript_item.src = "/imgs/thunderbolt.png"
+            descript_item.style.display = "inline";
+            descript_item.style.width = "75px";
+            descript_item.style.height = "75px";
+            descript_item.style.margin = "1em";
+           
+            descript_entry.appendChild(descript_item);
+            descript_entry.appendChild(descript_p);
+            descript_list.appendChild(descript_entry);
+         }
+         if(song_analytics[1] >= 60){
+            let descript_entry = document.createElement("p");
+            descript_entry.className = "descript_entry";
+            let descript_item = document.createElement("img")
+            let descript_p = document.createElement("p");
+            descript_p.textContent = "This song is quite groovy!"
+            descript_item.src = "/imgs/dance.png"
+            descript_item.style.display = "inline";
+            descript_item.style.width = "75px";
+            descript_item.style.height = "75px";
+            descript_item.style.margin = "1em";
+            
+            descript_entry.appendChild(descript_item);
+            descript_entry.appendChild(descript_p);
+            descript_list.appendChild(descript_entry);
+         }
+         if(song_analytics[3] >= 60){
+            let descript_entry = document.createElement("p");
+            descript_entry.className = "descript_entry";
+            let descript_item = document.createElement("img")
+            let descript_p = document.createElement("p");
+            descript_p.textContent = "This song gives happy vibes!"
+            descript_item.src = "/imgs/happy.png"
+            descript_item.style.display = "inline";
+            descript_item.style.width = "75px";
+            descript_item.style.height = "75px";
+            descript_item.style.margin = "1em";
+            
+            descript_entry.appendChild(descript_item);
+            descript_entry.appendChild(descript_p);
+            descript_list.appendChild(descript_entry);
+         }
+         if(song_analytics[3] <= 30){
+            let descript_entry = document.createElement("p");
+            descript_entry.className = "descript_entry";
+            let descript_item = document.createElement("img")
+            let descript_p = document.createElement("p");
+            descript_p.textContent = "This song gives sad vibes :("
+            descript_item.src = "/imgs/sad.png"
+            descript_item.style.display = "inline";
+            descript_item.style.width = "75px";
+            descript_item.style.height = "75px";
+            descript_item.style.margin = "1em";
+            
+            descript_entry.appendChild(descript_item);
+            descript_entry.appendChild(descript_p);
+            descript_list.appendChild(descript_entry);
+         }
+         if(song_analytics[4] >= 60){
+            let descript_entry = document.createElement("p");
+            descript_entry.className = "descript_entry";
+            let descript_item = document.createElement("img")
+            let descript_p = document.createElement("p");
+            descript_p.textContent = "This song is very acoustic!"
+            descript_item.src = "/imgs/guitar.png"
+            descript_item.style.display = "inline";
+            descript_item.style.width = "75px";
+            descript_item.style.height = "75px";
+            descript_item.style.margin = "1em";
+            descript_entry.appendChild(descript_item);
+            descript_entry.appendChild(descript_p);
+            descript_list.appendChild(descript_entry);
+         }
+         
          song_details.appendChild(song_title);
          song_details.appendChild(artist);
          song_details.appendChild(genre);
@@ -238,6 +321,8 @@ document.addEventListener("DOMContentLoaded", function(){
       }
    })
 
+   //Event listeners for clickable items that take you to
+   //the search view
    parent[0].addEventListener("click", function(e){
 
       if(e.target && e.target.classList.contains("search_button")){
@@ -265,11 +350,12 @@ document.addEventListener("DOMContentLoaded", function(){
             })
 
          }
-
          display_search_page(api_search);
       }
    })
 
+
+//Event listener for playlist header button
    parent[0].addEventListener("click", function(e){
       if(e.target && e.target.classList.contains("playlist_button")){
          search_view.style.display = "none";
@@ -278,7 +364,6 @@ document.addEventListener("DOMContentLoaded", function(){
          song_view.style.display = "none"
 
          display_playlist_page(playlist_data);
-
       }
    })
 
@@ -301,6 +386,7 @@ document.addEventListener("DOMContentLoaded", function(){
    let filter = document.getElementById("filter");
    let clear = document.getElementById("clear");
 
+   //event listener for filter and clear button in search view
    filter.addEventListener("click",function(){
 
       let option = document.querySelector('input[name="search_option"]:checked').value;
@@ -335,19 +421,43 @@ document.addEventListener("DOMContentLoaded", function(){
       display_search_page(api_search);
    })
 
+
+   //Event listener for adding song to playlist in search view. Also snackbar
    parent[0].addEventListener("click", function(e){
       if(e.target && e.target.classList.contains("playlist_add_button")){
          if(!playlist_data.find(({song_id}) => song_id == e.target.dataset.song)){
             playlist_data.push(api_data.find(({song_id}) => song_id == e.target.dataset.song));
+            let snackbar = document.getElementById("snackbar");
+            snackbar.className = "show";
+            setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
          }
       }
    })
+
+   //Credits header button event listner
+   parent[0].addEventListener("mouseover", function(e){
+      if(e.target && e.target.classList.contains("credits_button")){
+         e.target.innerHTML ="";
+         e.target.textContent = "Credits";
+         let popup = document.createElement("div");
+         popup.className = "credits_popup"
+         popup.textContent = "By: Johann Ebrole"
+         let link = document.createElement("a");
+         link.href = "https://github.com/joebro0919/f2023-assign2";
+         link.textContent = "Github Link";
+         popup.appendChild(link);
+         e.target.appendChild(popup);
+         setTimeout(() => {
+            e.target.removeChild(popup);
+         }, 5000)
+      }
+   })
+
+
 })
 
 /*
-
-
-
+For fetching the api data
 */
 function fetch_api(api_url){
    let api_data;
@@ -431,18 +541,10 @@ function get_top_genres(api_data){
 }  
 
 /*
-function get_api_obj(api_data,obj_name){
-   let result = [];
-   for(let i = 0; i < api_data.length; i++){
-      result.push(api_data[i].`${obj_name}`);
-      
-   };
-   return result;
-}
+Populates the search view 
 */
 function display_search_page(api_data){
    let search_results = document.querySelectorAll(".song_container span ul");
-   
    
    for(let i = 0; i<search_results.length;i++){
       search_results[i].innerHTML = "";
@@ -478,9 +580,18 @@ function display_search_page(api_data){
       search_results[4].appendChild(add_button);
    }
 }
-
+/*
+Populates playlist view
+*/
 function display_playlist_page(playlist_data){
    let playlist_info_list = document.querySelectorAll("#playlist ul");
+   let playlist_analytics = document.querySelector("#playlist_info div");
+   let analytics_data = get_playlist_analytics(playlist_data);
+
+   console.log(playlist_data);
+   console.log(analytics_data);
+   
+   playlist_analytics.innerHTML = "";
    playlist_info_list[0].innerHTML = "";
    playlist_info_list[1].innerHTML = "";
    playlist_info_list[2].innerHTML = "";
@@ -511,9 +622,52 @@ function display_playlist_page(playlist_data){
       remove_button.dataset.song = playlist_data[i].title;
       playlist_info_list[4].appendChild(remove_button);
    }
+
+   let popularity = document.createElement("p");
+   popularity.textContent = `Average Popularity: ${analytics_data.avg_pop}`;
+   let energy = document.createElement("p");
+   energy.textContent = `Average Energy: ${analytics_data.avg_energy}`;
+   let danceability = document.createElement("p");
+   danceability.textContent = `Average Danceability: ${analytics_data.avg_dance}`;
+   let valence = document.createElement("p");
+   valence.textContent = `Average Valence: ${analytics_data.avg_valence}`;
+
+   playlist_analytics.appendChild(popularity);
+   playlist_analytics.appendChild(energy);
+   playlist_analytics.appendChild(danceability);
+   playlist_analytics.appendChild(valence);
+
    return;
 }
+/*
+Input: Receives the playlist data
+Returns: an object containing the average popularity, energy, danceability and valence of the playlist
+*/
+function get_playlist_analytics(playlist_data){
+   let average_popularity = 0;
+   let average_energy = 0;
+   let average_danceability = 0;
+   let average_valence = 0;
 
+   for(let i = 0; i < playlist_data.length; i++){
+
+     average_popularity += playlist_data[i].details.popularity;
+     average_energy += playlist_data[i].analytics.energy;
+     average_danceability += playlist_data[i].analytics.danceability;
+     average_valence+= playlist_data[i].analytics.valence;
+
+   }
+   average_popularity = Math.round(average_popularity/playlist_data.length);
+   average_energy = Math.round(average_energy/playlist_data.length);
+   average_danceability = Math.round(average_danceability/playlist_data.length);
+   average_valence = Math.round(average_valence/playlist_data.length);
+
+   let analytics = {avg_pop: average_popularity, avg_energy: average_energy,
+   avg_dance:average_danceability,avg_valence : average_valence};
+
+   return analytics;
+
+}
 
 function create_ellipse(api_data_obj){
    let ellipse = document.createElement("button");

@@ -52,7 +52,7 @@
         <div id = "playlist_info">
             <button id="clear_playlist">Clear Playlist</button>
             <div>
-                cool
+                <h2>Playlist Analytics</h2>
             </div>
         </div>
         
@@ -80,19 +80,11 @@
                 <h3>Remove</h3>
                 <ul></ul>
             </span>
-        
-    
         </div>
-    
 
         <footer>
             <img  class ="home_button zoom" src="/imgs/statify-logos_transparent.png">
         </footer>
-
-
-
-
-        
     </div>
 
     <div id="song">
@@ -108,10 +100,15 @@
             <span id ="song_details">
                 <h2></h2>
             </span>
-            <span id = "song_analysis">
-                <h2>Song Details</h2>
-                <canvas id="myChart" style="max-height: 50vh;"></canvas>
-            </span>
+            <div class = "container2">
+                <span id = "song_analysis">
+                    <h2>Song Analysis</h2>
+                    <canvas id="myChart" style="max-height: 50vh;display:inline"></canvas>
+                </span>
+                <span id = "song_descript">
+                    <h2>Analysis Data</h2>
+                </span>
+             </div>
 
         </div>
         <footer>
@@ -156,8 +153,8 @@
                             </datalist>
                         </li>
                     </ul>
-                    <input type="button" value = "Filter" id="filter">
-                    <input type="button" value = "Clear" id="clear">
+                    <input type="button" class = "form_button" value = "Filter" id="filter">
+                    <input type="button" class = "form_button" value = "Clear" id="clear">
                 </form>
             </span>
 
@@ -186,6 +183,7 @@
                     </span>
                     <span class ="add">
                         <h3>Add</h3>
+                        <div id="snackbar">Song added to playlist</div>
                         <ul></ul>
                     </span>
                 </div>
@@ -196,8 +194,6 @@
             <img  class ="home_button zoom" src="/imgs/statify-logos_transparent.png">
         </footer>
     </div>
-    
-    
     
 </body>
 </html>
